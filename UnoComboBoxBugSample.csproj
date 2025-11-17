@@ -1,0 +1,23 @@
+<Project Sdk="Uno.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net9.0-desktop</TargetFrameworks>
+    <OutputType>Exe</OutputType>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <UnoSingleProject>true</UnoSingleProject>
+
+    <!-- Display name -->
+    <ApplicationTitle>Uno ComboBox Bug Sample</ApplicationTitle>
+    <ApplicationId>com.example.unocomboboxbugsample</ApplicationId>
+
+    <!-- Versions -->
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <ApplicationVersion>1</ApplicationVersion>
+
+    <!-- Uno Features -->
+    <UnoFeatures>
+      Material;
+    </UnoFeatures>
+  </PropertyGroup>
+</Project>

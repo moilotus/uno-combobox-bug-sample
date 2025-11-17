@@ -1,0 +1,100 @@
+<Window x:Class="UnoComboBoxBugSample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="ComboBox Bug Reproduction - Main Window">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Instructions -->
+        <StackPanel Grid.Row="0" Padding="20" Background="{ThemeResource SystemControlBackgroundAccentBrush}">
+            <TextBlock Text="ComboBox Bug Reproduction Steps:"
+                       FontWeight="Bold"
+                       FontSize="16"
+                       Foreground="White"/>
+            <TextBlock TextWrapping="Wrap" Foreground="White" Margin="0,8,0,0">
+                1. Click the ComboBox below - it should open ✅
+                <LineBreak/>
+                2. Click "Open Secondary Window"
+                <LineBreak/>
+                3. In the secondary window, double-click any item in the TreeView
+                <LineBreak/>
+                4. Return to this window
+                <LineBreak/>
+                5. Click the ComboBox again - BUG: it won't open ❌
+                <LineBreak/>
+                6. Alt-Tab away and back - ComboBox works again ✅
+            </TextBlock>
+        </StackPanel>
+
+        <!-- Controls -->
+        <StackPanel Grid.Row="1" Padding="20" Spacing="15">
+            <!-- ComboBox -->
+            <StackPanel Spacing="8">
+                <TextBlock Text="Test ComboBox (try clicking after returning from secondary window):"
+                           FontWeight="SemiBold"/>
+                <ComboBox x:Name="TestComboBox"
+                          MinWidth="200"
+                          SelectedIndex="0"
+                          DropDownOpened="TestComboBox_DropDownOpened"
+                          DropDownClosed="TestComboBox_DropDownClosed"
+                          PointerPressed="TestComboBox_PointerPressed">
+                    <ComboBoxItem Content="Option 1"/>
+                    <ComboBoxItem Content="Option 2"/>
+                    <ComboBoxItem Content="Option 3"/>
+                    <ComboBoxItem Content="Option 4"/>
+                    <ComboBoxItem Content="Option 5"/>
+                    <ComboBoxItem Content="Option 6"/>
+                    <ComboBoxItem Content="Option 7"/>
+                    <ComboBoxItem Content="Option 8"/>
+                    <ComboBoxItem Content="Option 9"/>
+                    <ComboBoxItem Content="Option 10"/>
+                </ComboBox>
+            </StackPanel>
+
+            <!-- Open Secondary Window Button -->
+            <Button x:Name="OpenSecondaryButton"
+                    Content="Open Secondary Window"
+                    Click="OpenSecondaryButton_Click"
+                    HorizontalAlignment="Left"/>
+
+            <!-- Event Counters -->
+            <StackPanel Spacing="5" Padding="10"
+                        Background="{ThemeResource SystemControlBackgroundBaseLowBrush}"
+                        CornerRadius="4">
+                <TextBlock Text="Event Diagnostics:" FontWeight="SemiBold"/>
+                <TextBlock x:Name="PointerPressedCountText" Text="PointerPressed events: 0"/>
+                <TextBlock x:Name="DropDownOpenedCountText" Text="DropDownOpened events: 0"/>
+                <TextBlock x:Name="DropDownClosedCountText" Text="DropDownClosed events: 0"/>
+                <TextBlock x:Name="LastEventText"
+                           Text="Last event: (none)"
+                           Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Log Output -->
+        <ScrollViewer Grid.Row="2" Padding="20,0,20,20">
+            <StackPanel Spacing="8">
+                <TextBlock Text="Event Log:" FontWeight="SemiBold"/>
+                <Border Background="{ThemeResource SystemControlBackgroundBaseLowBrush}"
+                        CornerRadius="4"
+                        Padding="10"
+                        MinHeight="200">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="300">
+                        <TextBlock x:Name="LogOutput"
+                                   TextWrapping="Wrap"
+                                   FontFamily="Consolas"
+                                   FontSize="12"/>
+                    </ScrollViewer>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>
